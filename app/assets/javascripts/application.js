@@ -13,6 +13,10 @@
 //= require rails-ujs
 //= require activestorage
 //= require jquery.min
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets
+
 //= require jquery-ui.min
 //= require moment.min
 //= require fullcalendar.min
@@ -22,5 +26,22 @@
 
 $(function () {
   $('#calendar').fullCalendar({
+    selectable: true,
+    header: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay'
+    },
+// リロードしたらカレンダーからイベントが消えるのを防ぐ
+    events: "/events.json",
+    color: 'yellow',
+    textColor: 'black',
+    // dayClick: function(date) {
+      // alert('clicked ' + date.format());
+    // },
+    select: function(startDate, endDate) {
+      // alert('selected ' + startDate.format() + ' to ' + endDate.format());
+      $('#new_event').modal('show');
+    }
   });
 });
